@@ -3,9 +3,14 @@ require('dotenv').config(); // Carrega as variáveis de ambiente do arquivo .env
 const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
+const cors = require('cors'); // <--- Linha adicionada: Importa o middleware CORS
 
 const app = express();
-app.use(bodyParser.json());
+
+// Middlewares
+app.use(bodyParser.json()); // Para analisar corpos de requisição JSON
+app.use(cors()); // <--- Linha adicionada: Habilita o CORS para todas as origens
+app.use(express.static('public')); // Para servir arquivos estáticos da pasta 'public'
 
 // Conexão com MySQL usando variáveis de ambiente
 const db = mysql.createConnection({
@@ -16,9 +21,16 @@ const db = mysql.createConnection({
 });
 
 db.connect(err => {
-  if (err) throw err;
+  if (err) {
+    console.error('Erro ao conectar ao MySQL:', err);
+    throw err; // Lança o erro para que a aplicação não continue com uma conexão falha
+  }
   console.log('Conectado ao MySQL!');
 });
+
+// =====================================
+// ROTAS DA API - OPERAÇÕES CRUD
+// =====================================
 
 // CREATE (Criar novo projeto com tecnologias)
 app.post('/projetos', (req, res) => {
@@ -107,7 +119,6 @@ app.get('/projetos', (req, res) => {
       return res.status(500).send(err);
     }
 
-  
     const projetosComTecnologias = results.map(row => {
       const tecnologias = [];
       if (row.tecnologias_ids && row.tecnologias_nomes) {
@@ -129,7 +140,7 @@ app.get('/projetos', (req, res) => {
   });
 });
 
-
+// READ (Buscar projeto por ID com tecnologias)
 app.get('/projetos/:id', (req, res) => {
   const { id } = req.params;
   const sql = `
@@ -181,7 +192,7 @@ app.get('/projetos/:id', (req, res) => {
   });
 });
 
-// UPDATE (Atualizar projeto)
+// UPDATE (Atualizar projeto e suas tecnologias)
 app.put('/projetos/:id', (req, res) => {
   const { id } = req.params;
   const { nome, descricao, tecnologias } = req.body; // 'tecnologias' é um array de IDs
