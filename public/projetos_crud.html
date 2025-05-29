@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Projetos - Portfólio</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="projetos_crud.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gerenciar Projetos do Portfólio</h1>
+        <p><a href="index.html">Voltar para o Portfólio Principal</a></p>
+
+        <div id="message-area" class="message" style="display:none;"></div>
+
+        <h2>Adicionar Novo Projeto</h2>
+        <form id="project-form">
+            <div class="form-group">
+                <label for="nome">Nome do Projeto:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Tecnologias (IDs separados por vírgula, ex: 1,3,5):</label>
+                <input type="text" id="tecnologias" name="tecnologias" placeholder="Ex: 1,2,4">
+                <small>Consulte os IDs das tecnologias no banco de dados (MySQL Workbench)</small>
+            </div>
+            <button type="submit">Salvar Projeto</button>
+        </form>
+
+        <h2>Meus Projetos</h2>
+        <div id="projetos-list">
+            <p>Carregando projetos...</p>
+        </div>
+    </div>
+
+    <script src="projetos.js"></script>
+</body>
+</html>

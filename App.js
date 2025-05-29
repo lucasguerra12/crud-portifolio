@@ -129,7 +129,7 @@ app.get('/projetos', (req, res) => {
   });
 });
 
-// READ (Buscar projeto por ID com tecnologias)
+
 app.get('/projetos/:id', (req, res) => {
   const { id } = req.params;
   const sql = `
@@ -184,14 +184,71 @@ app.get('/projetos/:id', (req, res) => {
 // UPDATE (Atualizar projeto)
 app.put('/projetos/:id', (req, res) => {
   const { id } = req.params;
-  const { nome, descricao } = req.body;
-  const sql = 'UPDATE projetos SET nome = ?, descricao = ? WHERE id = ?';
-  db.query(sql, [nome, descricao, id], (err) => {
+  const { nome, descricao, tecnologias } = req.body; // 'tecnologias' é um array de IDs
+
+  db.beginTransaction(err => {
     if (err) {
-      console.error('Erro ao atualizar projeto:', err);
+      console.error('Erro ao iniciar transação para UPDATE:', err);
       return res.status(500).send(err);
     }
-    res.status(200).send({ mensagem: 'Projeto atualizado com sucesso' });
+
+    // 1. Atualizar nome e descrição do projeto
+    const sqlUpdateProjeto = 'UPDATE projetos SET nome = ?, descricao = ? WHERE id = ?';
+    db.query(sqlUpdateProjeto, [nome, descricao, id], (err) => {
+      if (err) {
+        return db.rollback(() => {
+          console.error('Erro ao atualizar projeto (nome/descricao):', err);
+          res.status(500).send(err);
+        });
+      }
+
+      // 2. Excluir associações de tecnologias existentes para este projeto
+      const sqlDeleteAssociacoes = 'DELETE FROM projetos_tecnologias WHERE projeto_id = ?';
+      db.query(sqlDeleteAssociacoes, [id], (err) => {
+        if (err) {
+          return db.rollback(() => {
+            console.error('Erro ao excluir associações antigas de tecnologias:', err);
+            res.status(500).send(err);
+          });
+        }
+
+        // 3. Inserir novas associações de tecnologias (se houver)
+        if (tecnologias && tecnologias.length > 0) {
+          const sqlInsertAssociacoes = 'INSERT INTO projetos_tecnologias (projeto_id, tecnologia_id) VALUES ?';
+          const valoresNovasAssociacoes = tecnologias.map(techId => [id, techId]);
+
+          db.query(sqlInsertAssociacoes, [valoresNovasAssociacoes], (err) => {
+            if (err) {
+              return db.rollback(() => {
+                console.error('Erro ao inserir novas associações de tecnologias:', err);
+                res.status(500).send(err);
+              });
+            }
+            // Commit da transação se todas as etapas foram bem-sucedidas
+            db.commit(err => {
+              if (err) {
+                return db.rollback(() => {
+                  console.error('Erro ao fazer commit da transação de UPDATE:', err);
+                  res.status(500).send(err);
+                });
+              }
+              res.status(200).send({ mensagem: 'Projeto e tecnologias atualizados com sucesso' });
+            });
+          });
+        } else {
+          // Se não houver tecnologias na requisição, apenas comita as atualizações do projeto
+          db.commit(err => {
+            if (err) {
+              return db.rollback(() => {
+                console.error('Erro ao fazer commit da transação de UPDATE (sem tecnologias):', err);
+                res.status(500).send(err);
+              });
+            }
+            res.status(200).send({ mensagem: 'Projeto atualizado com sucesso (sem alteração de tecnologias)' });
+          });
+        }
+      });
+    });
   });
 });
 

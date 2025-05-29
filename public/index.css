@@ -1,0 +1,492 @@
+body {
+    background-image: repeating-linear-gradient(
+        to bottom,
+        #222A68 0%, 
+        #000000 35%,
+        #222A68 100%);
+    height: 100vh;   
+}
+
+ul {
+    list-style-type: none;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+
+.background-container {
+    height: 500px;
+    background-image: url('fundosetas.png');
+    background-size: contain;
+    width: 100%;
+    height: 40vw;
+    background-repeat: no-repeat;
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-start; 
+
+}
+
+.navbar-nav {
+    margin-top: -19px;
+}
+
+.navlink {
+  text-decoration: none;  
+  color: white;            
+}
+
+.navlink:hover {
+  color: #4e4e4e;          
+}
+
+.nomes {
+    font-family: "Zen Dots", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 7vw;
+    height: 10vw;
+    margin-left: 22vw;
+    margin-top: 10vw;
+    
+}
+
+.Guerra {
+    display: inline-block ;
+    margin-left: 42%;
+    position: relative;
+    top: -1vw;
+
+}
+.subtitulo {
+    font-size: 2vw;
+    font-family: "Zen Dots", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-top:4vw;
+    margin-left: 37vw;
+
+}
+
+.titulosobre {
+    font-size: 1vw;
+    font-family: "Zen Dots", sans-serif;
+    font-weight: 400;
+
+}
+.textosobremim {
+    font-size: 1vw;
+    font-family: "Zen Dots", sans-serif;
+    font-weight: 400;
+    margin-left: 5%;
+    
+
+}
+
+.sobre {
+    margin-left: 14vw;
+    margin-right: 15vw;
+    margin-top: 10vw;
+}
+
+.soft {
+    margin-top: 10vw;
+}
+
+
+.titulosoft {
+    font-size: 5vw;
+    font-family: "Zen Dots", sans-serif;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+
+
+}
+.skillsgrid {
+    display: grid;
+    margin-left: 8vw;
+    margin-right: 7vw;
+    grid-template-columns: repeat(auto-fit, minmax(13vw,1fr));
+    gap: 2vw;
+    padding: 2vw;
+}
+
+.skillsgrid img {
+    width: 12vw;
+    height: 12vw;
+    object-fit: contain;
+}
+
+.botao-descricao {
+        background-color: #D9D9D9;
+        height: 2vw;
+        width: 40vw; 
+        margin: 0 auto; 
+        border-radius: 20px;
+      }
+
+
+.titulo-botao {
+    color: black ;
+    font-family: "Inria Sans", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1vw;
+    text-align: center;
+    padding: 2px;
+
+}
+
+.grid2 {
+    display: grid;
+    margin-left: 15vw;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2vw;
+    padding: 2vw;
+    margin-top: 7vw;
+}
+
+.grid2 img {
+    height: 8vw;
+}
+
+.grid2 div {
+    display: flex;
+    color: aliceblue;
+    font-size: 2vw;
+}
+
+.grid2 p {
+    position: relative;
+    top: 2vw;
+    left: 2vw;
+}
+
+.tituloprojetos {
+    font-size: 5vw;
+    font-family: "Zen Dots", sans-serif;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+    margin-top: 5vw;
+    margin-bottom: 3vw;
+}
+
+
+.projetos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 2vw;
+}
+
+.descricao h2 {
+    color: aliceblue;
+    font-family: "Inria Sans", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  text-align: center;
+}
+
+.descricao p {
+    color: #ffffff;
+    font-family: "Merriweather", serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-size: 2vw;
+    text-align: center;
+    font-style: normal;
+    font-variation-settings:"wdth" 100;
+     padding-right: 5vw;
+     padding-top: vw;
+}
+
+.projeto {
+    display: grid;
+    gap: 20px;
+}
+
+.projeto img {
+    max-width: 200px;
+    height: auto;
+    border: 2px solid #3b3939;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+.formacoes {
+    display: block;
+    
+    }
+
+/* TELAS MAIORES */
+@media (min-width: 768px) {
+    .projeto {
+        grid-template-columns: 1fr 1fr; /* Duas colunas em telas maiores */
+        margin-bottom: 5vw;
+        gap: 1;
+    }
+
+    /* Inverte o layout do segundo projeto */
+    .projetos div:nth-child(2) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "descricao imagem";
+    }
+    
+    .projetos div:nth-child(2) img{
+        grid-area: imagem;
+    }
+    .projetos div:nth-child(2) .descricao h2{
+        grid-area: descricao;
+        text-align: center;
+        margin-bottom: 20px;
+
+    }
+
+    .projetos div:nth-child(4) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "descricao imagem";
+        margin-left: 40px;
+        
+    }
+    
+    .projetos div:nth-child(4) img{
+        grid-area: imagem;
+    }
+    .projetos div:nth-child(4) .descricao h2{
+        grid-area: descricao;
+        text-align: center;
+        margin-top: 40px;
+        
+
+    }
+    
+
+    
+    
+
+    .projeto img {
+        max-width: 550px;
+        height: auto; 
+        border: 2px solid #ccc;
+    border-radius: 5px;
+      }
+
+      .descricao p {
+        color: #ffffff;
+        font-family: "Merriweather", serif;
+        font-optical-sizing: auto;
+        font-weight: 300;
+        font-style: normal;
+        font-variation-settings:"wdth" 100;
+         padding-right: 5vw;
+         font-size: 1vw;
+    }
+    
+
+    .projetos div:nth-child(2) .descricao p{
+        grid-area: descricao;
+        text-align: center;
+        margin-left: 5vw;
+
+    }
+}
+
+
+.entrecontato {
+    font-size: 5vw;
+    font-family: "Zen Dots", sans-serif;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+    margin-top: 10vw;
+    margin-bottom: 3vw;
+}
+
+.info-box {
+    background-color: rgba(34, 31, 31, 0.5);
+    border-radius: 10px;
+    padding: 15px;
+    color: white;
+    font-family: sans-serif;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    margin-left: 30vh;
+    margin-right: 30vh;
+    position: relative; 
+    margin-top: 23px;
+    
+  }
+  .title {
+    font-size: 23px;
+    margin-bottom: 5px;
+    font-family: "Zen Dots", sans-serif;
+}
+.date {
+    font-size: 14px;
+    color: #ccc;
+    font-family: "Zen Dots", sans-serif;
+  }
+  .unip-logo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 100px;      
+    height: auto;      
+  }
+
+  .origamid-logo{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 90px;       
+    height: auto;
+  }
+
+  .ebac-logo {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 120px;       
+    height: auto;
+  }
+
+  @media screen and (max-width: 600px) {
+    .info-box {
+      margin-left: 20px; 
+      margin-right:20px ;
+    }
+    .title {
+        font-size: 9px;
+        margin-bottom: 5px;
+        font-family: "Zen Dots", sans-serif;
+    
+  }.date {
+    font-size: 8px;
+    color: #ccc;
+    font-family: "Zen Dots", sans-serif;
+  }
+  .unip-logo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 50px;       
+    height: auto;     
+  }
+
+  .origamid-logo {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    width: 50px;      
+    height: auto;
+  }
+
+  .ebac-logo{
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    width: 70px;      
+    height: auto;
+  }
+
+}
+
+.container {
+    width: 100%px; 
+
+    background-color: #2e2e2e; 
+    border-radius: 10px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px; 
+    margin: 0 auto; 
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: sans-serif; 
+}
+
+.button .text {
+    flex-grow: 1; 
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.button img {
+    width: 20px; 
+    height: 20px;
+    margin-right: 10px;
+}
+
+.whatsapp {
+    background-color: #25D366; 
+    color: white; 
+}
+
+.linkedin {
+    background-color: #0077B5;
+    color: white;
+}
+
+.github {
+    background-color: #333;
+    color: white;
+}
+
+.email {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+
+.button:hover {
+    opacity: 0.8;
+}
+
+
+.footer {
+    background-color: #222A68; 
+    padding: 15px 0; 
+    text-align: center; 
+    margin-top: 10vh;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    gap: 20px; 
+}
+
+.social-icon img {
+    width: 30px; 
+    height: 30px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.social-icon img:hover {
+    opacity: 1; 
+}
+  
+a {
+    text-decoration: none;
+}
+  
+  
+  
+
