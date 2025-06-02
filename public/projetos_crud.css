@@ -1,0 +1,195 @@
+/* projetos_crud.css - Estilos adaptados do index.css e específicos para CRUD */
+
+/* Estilos do body (adaptado do index.css) */
+body {
+    background-image: repeating-linear-gradient(
+        to bottom,
+        #222A68 0%, 
+        #000000 35%,
+        #222A68 100%
+    );
+    height: 100vh; /* Mantém a altura para o gradiente */
+    font-family: "Inter", sans-serif; /* Fonte principal, adaptada do index.css */
+    color: white; /* Cor do texto padrão, adaptada do index.css */
+    margin: 0; /* Remove margem padrão para ocupar 100% da tela */
+    padding: 20px; /* Adiciona um padding geral para o conteúdo */
+    box-sizing: border-box; /* Garante que padding não adicione largura extra */
+}
+
+/* Estilos da barra de navegação (adaptados do index.css, se você for incluir uma) */
+ul {
+    list-style-type: none;
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.navlink {
+    text-decoration: none;
+    color: white;
+}
+
+.navlink:hover {
+    color: #4e4e4e;
+}
+
+/* Estilos de títulos e textos gerais para consistência */
+h1, h2, h3 {
+    font-family: "Zen Dots", sans-serif; /* Fonte dos títulos */
+    font-weight: 400;
+    color: white; /* Cor padrão para títulos, pode ser sobrescrita pelo .container */
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+h1 { font-size: 3vw; }
+h2 { font-size: 2.5vw; }
+h3 { font-size: 2vw; }
+
+
+/* Estilos Específicos do Container do CRUD */
+.container {
+    max-width: 900px;
+    margin: 40px auto; /* Centraliza e adiciona margem superior/inferior */
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente para o container */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra mais forte */
+    color: white; /* Cor do texto dentro do container */
+}
+
+/* Estilos para Formulário */
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ccc; /* Cor da label */
+}
+.form-group input[type="text"],
+.form-group textarea {
+    width: calc(100% - 22px); /* Ajuste para padding */
+    padding: 10px;
+    border: 1px solid #555; /* Borda mais escura */
+    border-radius: 4px;
+    background-color: #333; /* Fundo do input */
+    color: white; /* Cor do texto do input */
+}
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+.form-group button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Azul padrão */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+.form-group button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para Itens da Lista de Projetos */
+.projeto-item {
+    background-color: rgba(34, 31, 31, 0.8); /* Fundo mais escuro e semi-transparente */
+    border: 1px solid #444; /* Borda escura */
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+.projeto-item h3 {
+    margin-top: 0;
+    color: #00ffc0; /* Verde/azul vibrante para o título do projeto */
+    text-align: left; /* Alinhar à esquerda */
+    font-size: 1.8vw; /* Tamanho ajustado para o item */
+}
+.projeto-item p {
+    color: #eee; /* Cor do texto da descrição */
+    font-family: "Merriweather", serif; /* Fonte da descrição */
+    font-size: 1.2vw; /* Tamanho ajustado */
+    text-align: left; /* Alinhar à esquerda */
+}
+.projeto-item p strong {
+    color: #fff; /* Tecnologias em branco */
+}
+.projeto-item .actions {
+    margin-top: 10px;
+    text-align: right; /* Botões alinhados à direita */
+}
+.projeto-item .actions button {
+    margin-left: 10px; /* Margem entre os botões */
+    padding: 8px 15px;
+    font-size: 14px;
+}
+.projeto-item .actions .edit-btn {
+    background-color: #28a745; /* Verde */
+}
+.projeto-item .actions .edit-btn:hover {
+    background-color: #218838;
+}
+.projeto-item .actions .delete-btn {
+    background-color: #dc3545; /* Vermelho */
+}
+.projeto-item .actions .delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Estilos para Mensagens */
+.message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0.9;
+}
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Media Queries para Responsividade (adaptado para o CRUD) */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    h1 { font-size: 6vw; }
+    h2 { font-size: 5vw; }
+    h3 { font-size: 4vw; }
+    .container {
+        margin: 20px auto;
+        padding: 15px;
+    }
+    .form-group input[type="text"],
+    .form-group textarea {
+        width: calc(100% - 20px);
+    }
+    .projeto-item h3 {
+        font-size: 3.5vw;
+    }
+    .projeto-item p {
+        font-size: 2.5vw;
+    }
+    .projeto-item .actions {
+        text-align: center;
+    }
+    .projeto-item .actions button {
+        display: block;
+        margin: 5px auto;
+        width: 80%;
+    }
+}
