@@ -1,6 +1,4 @@
-/* projetos_crud.css - Estilos adaptados do index.css e específicos para CRUD */
 
-/* Estilos do body (adaptado do index.css) */
 body {
     background-image: repeating-linear-gradient(
         to bottom,
@@ -8,15 +6,15 @@ body {
         #000000 35%,
         #222A68 100%
     );
-    height: 100vh; /* Mantém a altura para o gradiente */
-    font-family: "Inter", sans-serif; /* Fonte principal, adaptada do index.css */
-    color: white; /* Cor do texto padrão, adaptada do index.css */
-    margin: 0; /* Remove margem padrão para ocupar 100% da tela */
-    padding: 20px; /* Adiciona um padding geral para o conteúdo */
-    box-sizing: border-box; /* Garante que padding não adicione largura extra */
+    height: 100vh; 
+    font-family: "Inter", sans-serif; 
+    color: white;
+    margin: 0;
+    padding: 20px; 
+    box-sizing: border-box; 
 }
 
-/* Estilos da barra de navegação (adaptados do index.css, se você for incluir uma) */
+
 ul {
     list-style-type: none;
     color: white;
@@ -35,11 +33,11 @@ ul {
     color: #4e4e4e;
 }
 
-/* Estilos de títulos e textos gerais para consistência */
+
 h1, h2, h3 {
-    font-family: "Zen Dots", sans-serif; /* Fonte dos títulos */
+    font-family: "Zen Dots", sans-serif; 
     font-weight: 400;
-    color: white; /* Cor padrão para títulos, pode ser sobrescrita pelo .container */
+    color: white; 
     text-align: center;
     margin-top: 20px;
     margin-bottom: 15px;
@@ -52,15 +50,15 @@ h3 { font-size: 2vw; }
 /* Estilos Específicos do Container do CRUD */
 .container {
     max-width: 900px;
-    margin: 40px auto; /* Centraliza e adiciona margem superior/inferior */
-    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente para o container */
+    margin: 40px auto; 
+    background-color: rgba(0, 0, 0, 0.7); 
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Sombra mais forte */
-    color: white; /* Cor do texto dentro do container */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); 
+    color: white; 
 }
 
-/* Estilos para Formulário */
+
 .form-group {
     margin-bottom: 15px;
 }
@@ -72,12 +70,12 @@ h3 { font-size: 2vw; }
 }
 .form-group input[type="text"],
 .form-group textarea {
-    width: calc(100% - 22px); /* Ajuste para padding */
+    width: calc(100% - 22px); 
     padding: 10px;
-    border: 1px solid #555; /* Borda mais escura */
+    border: 1px solid #555; 
     border-radius: 4px;
-    background-color: #333; /* Fundo do input */
-    color: white; /* Cor do texto do input */
+    background-color: #333; 
+    color: white; 
 }
 .form-group textarea {
     resize: vertical;
@@ -85,7 +83,7 @@ h3 { font-size: 2vw; }
 }
 .form-group button {
     padding: 10px 20px;
-    background-color: #007bff; /* Azul padrão */
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
@@ -97,52 +95,52 @@ h3 { font-size: 2vw; }
     background-color: #0056b3;
 }
 
-/* Estilos para Itens da Lista de Projetos */
+
 .projeto-item {
-    background-color: rgba(34, 31, 31, 0.8); /* Fundo mais escuro e semi-transparente */
-    border: 1px solid #444; /* Borda escura */
+    background-color: rgba(34, 31, 31, 0.8); 
+    border: 1px solid #444; 
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 6px;
 }
 .projeto-item h3 {
     margin-top: 0;
-    color: #00ffc0; /* Verde/azul vibrante para o título do projeto */
-    text-align: left; /* Alinhar à esquerda */
-    font-size: 1.8vw; /* Tamanho ajustado para o item */
+    color: #00ffc0; 
+    text-align: left; 
+    font-size: 1.8vw;
 }
 .projeto-item p {
-    color: #eee; /* Cor do texto da descrição */
-    font-family: "Merriweather", serif; /* Fonte da descrição */
-    font-size: 1.2vw; /* Tamanho ajustado */
-    text-align: left; /* Alinhar à esquerda */
+    color: #eee; 
+    font-family: "Merriweather", serif;
+    font-size: 1.2vw; 
+    text-align: left; 
 }
 .projeto-item p strong {
-    color: #fff; /* Tecnologias em branco */
+    color: #fff; 
 }
 .projeto-item .actions {
     margin-top: 10px;
-    text-align: right; /* Botões alinhados à direita */
+    text-align: right; 
 }
 .projeto-item .actions button {
-    margin-left: 10px; /* Margem entre os botões */
+    margin-left: 10px; 
     padding: 8px 15px;
     font-size: 14px;
 }
 .projeto-item .actions .edit-btn {
-    background-color: #28a745; /* Verde */
+    background-color: #28a745; 
 }
 .projeto-item .actions .edit-btn:hover {
     background-color: #218838;
 }
 .projeto-item .actions .delete-btn {
-    background-color: #dc3545; /* Vermelho */
+    background-color: #dc3545; 
 }
 .projeto-item .actions .delete-btn:hover {
     background-color: #c82333;
 }
 
-/* Estilos para Mensagens */
+
 .message {
     padding: 10px;
     margin-bottom: 15px;
@@ -162,7 +160,7 @@ h3 { font-size: 2vw; }
     border: 1px solid #f5c6cb;
 }
 
-/* Media Queries para Responsividade (adaptado para o CRUD) */
+
 @media (max-width: 768px) {
     body {
         padding: 10px;
