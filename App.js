@@ -1,18 +1,18 @@
-require('dotenv').config(); // Carrega as variáveis de ambiente do arquivo .env
+require('dotenv').config(); 
 
 const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
-const cors = require('cors'); // <--- Linha adicionada: Importa o middleware CORS
+const cors = require('cors'); 
 
 const app = express();
 
 // Middlewares
-app.use(bodyParser.json()); // Para analisar corpos de requisição JSON
-app.use(cors()); // <--- Linha adicionada: Habilita o CORS para todas as origens
-app.use(express.static('public')); // Para servir arquivos estáticos da pasta 'public'
+app.use(bodyParser.json()); 
+app.use(cors()); 
+app.use(express.static('public'));
 
-// Conexão com MySQL usando variáveis de ambiente
+
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -23,31 +23,27 @@ const db = mysql.createConnection({
 db.connect(err => {
   if (err) {
     console.error('Erro ao conectar ao MySQL:', err);
-    throw err; // Lança o erro para que a aplicação não continue com uma conexão falha
+    throw err;
   }
   console.log('Conectado ao MySQL!');
 });
 
-// =====================================
-// ROTAS DA API - OPERAÇÕES CRUD
-// =====================================
 
-// CREATE (Criar novo projeto com tecnologias)
 app.post('/projetos', (req, res) => {
-  const { nome, descricao, tecnologias } = req.body; // 'tecnologias' é um array de IDs
+  const { nome, descricao, tecnologias } = req.body; 
 
-  // Iniciar uma transação para garantir que ambas as inserções aconteçam ou nenhuma delas
+  
   db.beginTransaction(err => {
     if (err) {
       console.error('Erro ao iniciar transação:', err);
       return res.status(500).send(err);
     }
 
-    // 1. Inserir o novo projeto na tabela 'projetos'
+    
     const sqlProjeto = 'INSERT INTO projetos (nome, descricao) VALUES (?, ?)';
     db.query(sqlProjeto, [nome, descricao], (err, resultProjeto) => {
       if (err) {
-        return db.rollback(() => { // Em caso de erro, desfaz a transação
+        return db.rollback(() => {
           console.error('Erro ao inserir projeto:', err);
           res.status(500).send(err);
         });
@@ -55,20 +51,19 @@ app.post('/projetos', (req, res) => {
 
       const projectId = resultProjeto.insertId;
 
-      // 2. Inserir as associações na tabela 'projetos_tecnologias'
+      
       if (tecnologias && tecnologias.length > 0) {
-        // Prepara os valores para inserção em massa: [[projeto_id, tecnologia_id], ...]
         const sqlAssociacao = 'INSERT INTO projetos_tecnologias (projeto_id, tecnologia_id) VALUES ?';
         const valoresAssociacao = tecnologias.map(techId => [projectId, techId]);
 
         db.query(sqlAssociacao, [valoresAssociacao], (err) => {
           if (err) {
-            return db.rollback(() => { // Em caso de erro, desfaz a transação
+            return db.rollback(() => { 
               console.error('Erro ao associar tecnologias:', err);
               res.status(500).send(err);
             });
           }
-          // Se tudo deu certo, commit da transação
+          
           db.commit(err => {
             if (err) {
               return db.rollback(() => {
@@ -80,7 +75,7 @@ app.post('/projetos', (req, res) => {
           });
         });
       } else {
-        // Se não houver tecnologias para associar, apenas faz commit do projeto
+        
         db.commit(err => {
           if (err) {
             return db.rollback(() => {
@@ -95,7 +90,7 @@ app.post('/projetos', (req, res) => {
   });
 });
 
-// READ (Listar todos os projetos com tecnologias)
+
 app.get('/projetos', (req, res) => {
   const sql = `
     SELECT
@@ -140,7 +135,7 @@ app.get('/projetos', (req, res) => {
   });
 });
 
-// READ (Buscar projeto por ID com tecnologias)
+
 app.get('/projetos/:id', (req, res) => {
   const { id } = req.params;
   const sql = `
@@ -171,7 +166,6 @@ app.get('/projetos/:id', (req, res) => {
       return res.status(404).send({ mensagem: 'Projeto não encontrado' });
     }
 
-    // Processar o resultado (primeira linha) para formatar as tecnologias
     const row = results[0];
     const tecnologias = [];
     if (row.tecnologias_ids && row.tecnologias_nomes) {
@@ -192,10 +186,10 @@ app.get('/projetos/:id', (req, res) => {
   });
 });
 
-// UPDATE (Atualizar projeto e suas tecnologias)
+
 app.put('/projetos/:id', (req, res) => {
   const { id } = req.params;
-  const { nome, descricao, tecnologias } = req.body; // 'tecnologias' é um array de IDs
+  const { nome, descricao, tecnologias } = req.body; 
 
   db.beginTransaction(err => {
     if (err) {
@@ -203,7 +197,7 @@ app.put('/projetos/:id', (req, res) => {
       return res.status(500).send(err);
     }
 
-    // 1. Atualizar nome e descrição do projeto
+  
     const sqlUpdateProjeto = 'UPDATE projetos SET nome = ?, descricao = ? WHERE id = ?';
     db.query(sqlUpdateProjeto, [nome, descricao, id], (err) => {
       if (err) {
@@ -213,7 +207,7 @@ app.put('/projetos/:id', (req, res) => {
         });
       }
 
-      // 2. Excluir associações de tecnologias existentes para este projeto
+      
       const sqlDeleteAssociacoes = 'DELETE FROM projetos_tecnologias WHERE projeto_id = ?';
       db.query(sqlDeleteAssociacoes, [id], (err) => {
         if (err) {
@@ -223,7 +217,6 @@ app.put('/projetos/:id', (req, res) => {
           });
         }
 
-        // 3. Inserir novas associações de tecnologias (se houver)
         if (tecnologias && tecnologias.length > 0) {
           const sqlInsertAssociacoes = 'INSERT INTO projetos_tecnologias (projeto_id, tecnologia_id) VALUES ?';
           const valoresNovasAssociacoes = tecnologias.map(techId => [id, techId]);
@@ -235,7 +228,7 @@ app.put('/projetos/:id', (req, res) => {
                 res.status(500).send(err);
               });
             }
-            // Commit da transação se todas as etapas foram bem-sucedidas
+           
             db.commit(err => {
               if (err) {
                 return db.rollback(() => {
@@ -247,7 +240,7 @@ app.put('/projetos/:id', (req, res) => {
             });
           });
         } else {
-          // Se não houver tecnologias na requisição, apenas comita as atualizações do projeto
+         
           db.commit(err => {
             if (err) {
               return db.rollback(() => {
@@ -263,7 +256,7 @@ app.put('/projetos/:id', (req, res) => {
   });
 });
 
-// DELETE (Excluir projeto)
+
 app.delete('/projetos/:id', (req, res) => {
   const { id } = req.params;
   db.query('DELETE FROM projetos WHERE id = ?', [id], (err) => {
@@ -275,7 +268,6 @@ app.delete('/projetos/:id', (req, res) => {
   });
 });
 
-// Iniciar servidor
 app.listen(3000, () => {
   console.log('Servidor rodando em http://localhost:3000');
 });

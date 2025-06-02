@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="index.css">
     <link rel="icon" href="logo-favi.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;0,400;1,700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
@@ -90,36 +90,8 @@
     </div>
 
     <h1 class="tituloprojetos" id="projetos">Projetos</h1>
-    <div class="projetos">
-        <div class="projeto">
-            <img src="img/api-vereadores.png" alt="Projeto API - BYTETECH">
-            <div class="descricao">
-                <h2>API - BYTETECH</h2>
-                <p>Software para Análise de Candidatos: Apresento um software inovador desenvolvido para a faculdade, que compila estatísticas e informações detalhadas sobre os candidatos a vereadores de São José dos Campos. Essa ferramenta oferece uma visão clara e acessível, facilitando a compreensão do cenário político local.</p>
-            </div>
-        </div>
-
-        <div class="projeto">
-            <img src="img/propel.jpg" alt="Projeto Propel Serviços">
-            <div class="descricao">
-                <h2>PROPEL SERVIÇOS</h2>
-                <p>Desenvolvi um site de serviços para máquinas de obra, como tratores e guindastes. A plataforma intuitiva e visualmente organizada facilita a locação desses equipamentos essenciais. Este projeto demonstra minhas habilidades em front-end, unindo estética e funcionalidade para otimizar a experiência do usuário.</p>
-            </div>
-        </div>
-        <div class="projeto">
-            <img src="img/api-debuggers.png" alt="Projeto API - BYTETECH">
-            <div class="descricao">
-                <h2>API - DEBUGGERS</h2>
-                <p>"Criação de um Dashboard de Indicadores para a Helpnei que permite o acompanhamento do crescimento do projeto e a visualização clara de dados relevantes para patrocinadores e stakeholders. As métricas incluem número de lojas criadas, usuários impactados, volume de transações, distribuição geográfica e engajamento na plataforma."</p>
-            </div>
-        </div>
-        <div class="projeto">
-            <img src="img/haka.png" alt="HAKA Company">
-            <div class="descricao">
-                <h2>HAKA COMPANY</h2>
-                <p>"Desenvolvi uma loja de roupas em WordPress com diversas funcionalidades para proporcionar uma excelente experiência de compra online, incluindo um catálogo de produtos detalhado, um carrinho de compras intuitivo e integração de pagamento segura."</p>
-            </div>
-        </div>
+    <div class="projetos" id="projetos-dinamicos-container">
+        <p>Carregando projetos do banco de dados...</p>
     </div>
     <h1 class="tituloprojetos">Sobre mim</h1>
     <div class="formacoes">
@@ -178,5 +150,5 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script src="index.js"></script> </body>
 </html>
